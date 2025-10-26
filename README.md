@@ -1,1 +1,1 @@
-Tugas Praktikum dari Mata KUliah Basis Data
+Tugas Praktikum dari Mata Kuliah Basis Data
