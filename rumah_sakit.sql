@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2025 at 08:56 AM
--- Server version: 10.4.32-MariaDB
+-- Generation Time: Nov 30, 2025 at 02:54 AM
+-- Server version: 10.4.32-MariaDB-log
 -- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -162,7 +162,8 @@ CREATE TABLE `obat` (
 INSERT INTO `obat` (`id_obat`, `kode_obat`, `nama_obat`, `harga`, `stok`) VALUES
 (1, 'A001', 'Amikacin', 20000, 10),
 (2, 'A002', 'Amoxilin', 15000, 15),
-(3, 'A003', 'Betadine', 7000, 5);
+(3, 'A003', 'Betadine', 7000, 25),
+(4, 'A004', 'Paracetamol', 8000, 10);
 
 -- --------------------------------------------------------
 
@@ -231,14 +232,13 @@ CREATE TABLE `transaksi_obat` (
 --
 
 INSERT INTO `transaksi_obat` (`id_transaksi`, `id_pasien`, `id_obat`, `jumlah`, `total_harga`) VALUES
-(1, 1, 2, 5, 0);
+(7, 1, 2, 5, 0);
 
 --
 -- Triggers `transaksi_obat`
 --
 DELIMITER $$
-CREATE TRIGGER `tg_jual` AFTER INSERT ON `transaksi_obat` FOR EACH ROW UPDATE obat SET stok = stok-new.jumlah
-WHERE id_obat=new.id_obat
+CREATE TRIGGER `tg_jual` AFTER INSERT ON `transaksi_obat` FOR EACH ROW UPDATE obat SET stok = stok - new.jumlah WHERE id_obat=new.id_obat
 $$
 DELIMITER ;
 
@@ -334,7 +334,7 @@ ALTER TABLE `dokter_admin`
 -- AUTO_INCREMENT for table `obat`
 --
 ALTER TABLE `obat`
-  MODIFY `id_obat` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_obat` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `pasien`
@@ -352,7 +352,7 @@ ALTER TABLE `pasien_dokter`
 -- AUTO_INCREMENT for table `transaksi_obat`
 --
 ALTER TABLE `transaksi_obat`
-  MODIFY `id_transaksi` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_transaksi` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
